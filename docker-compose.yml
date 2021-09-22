@@ -21,7 +21,7 @@ services:
       args:
         user: ${DOCKER_USER}
         uid: ${DOCKER_UID}
-      context: DevDocker2
+      context: .
       dockerfile: docker/Dockerfile
     restart: unless-stopped
     working_dir: /var/www/
