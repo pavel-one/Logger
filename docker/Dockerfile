@@ -28,6 +28,7 @@ RUN curl -sL https://deb.nodesource.com/setup_14.x -o nodesource_setup.sh
 RUN bash ./nodesource_setup.sh
 RUN rm ./nodesource_setup.sh
 RUN apt install nodejs -y
+RUN npm install -g laravel-echo-server
 
 # Очистка кэша apt
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*

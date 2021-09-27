@@ -25,6 +25,8 @@ services:
       dockerfile: docker/Dockerfile
     restart: unless-stopped
     working_dir: /var/www/
+    ports:
+        - "6001:6001"
     volumes:
       - ./:/var/www
       - ./docker/conf/php/project.ini:/usr/local/etc/php/conf.d/project.ini
