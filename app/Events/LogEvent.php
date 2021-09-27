@@ -14,9 +14,6 @@ class LogEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $actionId;
-    public $actionData;
-
     /**
      * Create a new event instance.
      *
@@ -24,20 +21,8 @@ class LogEvent implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct($actionId, $actionData)
+    public function __construct()
     {
-        $this->actionId = $actionId;
-        $this->actionData = $actionData;
-    }
-
-    /**
-     * The event's broadcast name.
-     *
-     * @return string
-     */
-    public function broadcastAs(): string
-    {
-        return 'logger.add';
     }
 
     /**
@@ -47,7 +32,7 @@ class LogEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('notification.logger');
+        return new Channel('logger.event');
     }
 
 }
