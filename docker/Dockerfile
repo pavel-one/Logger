@@ -23,6 +23,12 @@ RUN apt-get update && apt-get install -y \
     libpq-dev \
     git
 
+#nodejs
+RUN curl -sL https://deb.nodesource.com/setup_14.x -o nodesource_setup.sh
+RUN bash ./nodesource_setup.sh
+RUN rm ./nodesource_setup.sh
+RUN apt install nodejs -y
+
 # Очистка кэша apt
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
