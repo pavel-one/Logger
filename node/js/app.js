@@ -1,17 +1,5 @@
-import Echo from "laravel-echo";
+import io from 'socket.io-client'
+const host = `${window.location.hostname}:6001`;
 
-window.io = require('socket.io-client')
+const sock = io(host)
 
-const echo = new Echo({
-    broadcaster: 'socket.io',
-    host: `${window.location.hostname}:6001`,
-});
-
-console.log('INJECTED')
-
-echo.channel('logger.event')
-    .listen('.add', e => {
-        console.log('test', e)
-    })
-
-console.log(echo)
