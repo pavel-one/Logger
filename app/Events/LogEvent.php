@@ -35,4 +35,9 @@ class LogEvent implements ShouldBroadcast
         return new Channel('logger.event');
     }
 
+    public function broadcastAs(): string
+    {
+        return 'add';
+    }
+
 }

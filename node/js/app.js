@@ -10,7 +10,7 @@ const echo = new Echo({
 console.log('INJECTED')
 
 echo.channel('logger.event')
-    .listen('LogEvent', e => {
+    .listen('.add', e => {
         console.log('test', e)
     })
 
