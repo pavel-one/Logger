@@ -8,7 +8,8 @@ Logger
 4. Входим в контейнер `make exec`
 5. Устанавливаем зависимости `npm install && composer install && npm run prod`
 6. Генерируем ключ `php artisan key:generate`
-7. Копируем файл супервизора `sudo cp logger-supervisor.ini /etc/supervisor.d/logger.ini`
-8. Обновляем supervisor и запускаем `supervisorctl reread && supervisorctl update && supervisorctl start all`
-9. В hosts добавляем адрес `127.0.0.1 local-logger.pavel.one`
-10. Переходим по [https://local-logger.pavel.one](https://local-logger.pavel.one)
+7. Генерируем конфигурацию laravel-echo `laravel-echo-server init`
+8. Копируем файл супервизора `sudo cp logger-supervisor.ini /etc/supervisor.d/logger.ini`
+9. Обновляем supervisor и запускаем `supervisorctl reread && supervisorctl update && supervisorctl start all`
+10. В hosts добавляем адрес `127.0.0.1 local-logger.pavel.one`
+11. Переходим по [https://local-logger.pavel.one](https://local-logger.pavel.one)
