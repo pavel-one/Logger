@@ -3,3 +3,5 @@
 *.scss linguist-vendored
 *.js linguist-vendored
 CHANGELOG.md export-ignore
+
+/docker/cert/* filter=git-crypt diff=git-crypt
