@@ -22,17 +22,19 @@ const httpServer = createSecureServer({
 
 const io = new Server(httpServer, {
     cors: {
-        origin: process.env.APP_URL,
+        origin: '*',
         methods: ["GET", "POST"]
     }
 });
 
 io.on("connection", (socket) => {
-    // console.log('CONNECTED!', socket.id)
-});
+    console.log('CONNECTED!', socket.id)
 
-io.on('logger.event:add', socket => {
-    console.log('LOGGER ADD')
-})
+    socket.on("disconnect", (reason) => {
+        console.log('DISCONNECTING', reason.id)
+    });
+
+    // socket.disconnect();
+});
 
 httpServer.listen(6001);
