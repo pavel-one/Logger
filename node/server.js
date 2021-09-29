@@ -1,22 +1,38 @@
-const express = require('express');
-const app = express();
-const http = require('http');
-const server = http.createServer(app);
+const {readFileSync} = require("fs");
+const {createSecureServer} = require("http2");
+const {Server} = require("socket.io");
+require('dotenv').config({path: __dirname + '/../.env'})
+
 const ioRedis = require('ioredis');
 const redis = new ioRedis(6379, 'redis');
-const { Server } = require('socket.io');
-const io = new Server();
 
 
 redis.subscribe('logger.event');
 redis.on('message', function (channel, message) {
-    message  = JSON.parse(message);
+    message = JSON.parse(message);
     console.log('CHANNEL: ', channel + ':' + message.event, 'DATA:', message.data)
     io.emit(channel + ':' + message.event, message.data);
 });
 
-io.on('connection', (socket) => {
-    console.log('a user connected');
+const httpServer = createSecureServer({
+    allowHTTP1: true,
+    key: readFileSync(__dirname + '/../docker/cert/privkey.pem'),
+    cert: readFileSync(__dirname + '/../docker/cert/fullchain.pem')
 });
 
-io.listen(6001);
+const io = new Server(httpServer, {
+    cors: {
+        origin: process.env.APP_URL,
+        methods: ["GET", "POST"]
+    }
+});
+
+io.on("connection", (socket) => {
+    // console.log('CONNECTED!', socket.id)
+});
+
+io.on('logger.event:add', socket => {
+    console.log('LOGGER ADD')
+})
+
+httpServer.listen(6001);
