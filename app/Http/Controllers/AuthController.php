@@ -18,7 +18,7 @@ class AuthController extends Controller
         return Response::json([
             'user' => UserResource::make($user),
             'token' => TokenResource::make($token)
-        ], 202);
+        ], 201);
     }
 
     public function user(): UserResource
