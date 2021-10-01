@@ -32,28 +32,18 @@ io.on("connection", async (socket) => {
     const token = socket.handshake.headers.authorization;
 
     socket.on("disconnect", (reason) => {
-        console.log('DISCONNECTING', reason.id)
+        //console.log('DISCONNECTING')
     });
 
     try {
-        console.log('REQUEST TOKEN', token)
-        const response = await axios.get(base_url + 'api/user', {
+        await axios.get(base_url + 'api/user', {
             headers: {
                 Authorization: token
             }
         })
-        console.log('AUTH SUCCESS: ', response.data)
     } catch (e) {
-        console.log('ERROR AUTH: ', e.message)
         socket.disconnect();
     }
-
-
-    console.log('CONNECTED!', socket.id)
-
-
-
-    // socket.disconnect();
 });
 
 httpServer.listen(6001);
