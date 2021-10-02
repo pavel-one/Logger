@@ -22,7 +22,8 @@ class LogFactory extends Factory
     public function definition()
     {
         return [
-            'message' => \Str::words(20)
+            'message' => \Str::words(20),
+            'level' => $this->faker->randomElement([0, 1, 2]) //TODO: Из списка уровней
         ];
     }
 }

@@ -20,6 +20,7 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\User $user
+ * @method static \Database\Factories\CategoryFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Category newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Category newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Category query()
@@ -42,13 +43,16 @@ namespace App\Models{
  * @property int $category_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property int $level
  * @property-read \App\Models\Category $category
+ * @method static \Database\Factories\LogFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Log newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Log newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Log query()
  * @method static \Illuminate\Database\Eloquent\Builder|Log whereCategoryId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Log whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Log whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Log whereLevel($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Log whereMessage($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Log whereUpdatedAt($value)
  * @mixin \Eloquent
@@ -61,11 +65,12 @@ namespace App\Models{
  * App\Models\LogData
  *
  * @property int $id
- * @property mixed $content
+ * @property array $content
  * @property int $log_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Log $log
+ * @method static \Database\Factories\LogDataFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|LogData newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|LogData newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|LogData query()
@@ -120,7 +125,7 @@ namespace App\Models{
  * @property-read int|null $categories_count
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read int|null $notifications_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Sanctum\PersonalAccessToken[] $tokens
+ * @property-read \Illuminate\Database\Eloquent\Collection|PersonalAccessToken[] $tokens
  * @property-read int|null $tokens_count
  * @method static \Database\Factories\UserFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
