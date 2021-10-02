@@ -18,6 +18,8 @@ RUN apt-get update && apt-get install -y \
     imagemagick \
     zlib1g-dev \
     libzip-dev \
+    libjpeg-dev \
+    libfreetype6-dev \
     unzip \
     zsh \
     libpq-dev \
@@ -43,7 +45,7 @@ RUN pecl install -o -f redis \
 
 # Image Magick
 RUN printf "\n" | pecl install imagick
-RUN docker-php-ext-enable imagick
+RUN docker-php-ext-enable imagick gd
 
 # Последний композер
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer

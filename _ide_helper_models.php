@@ -19,6 +19,8 @@ namespace App\Models{
  * @property int $user_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Log[] $logs
+ * @property-read int|null $logs_count
  * @property-read \App\Models\User $user
  * @method static \Database\Factories\CategoryFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Category newModelQuery()
@@ -45,6 +47,9 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property int $level
  * @property-read \App\Models\Category $category
+ * @property-read \App\Models\LogData|null $data
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\LogFile[] $files
+ * @property-read int|null $files_count
  * @method static \Database\Factories\LogFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Log newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Log newQuery()

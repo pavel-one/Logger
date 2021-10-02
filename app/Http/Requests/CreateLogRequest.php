@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Log;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class CreateLogRequest extends FormRequest
 {
@@ -11,9 +13,9 @@ class CreateLogRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,10 +23,20 @@ class CreateLogRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            //
+            'level' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::in(Log::getLevels())
+            ],
+            'category' => 'required|string',
+            'message' => 'required|string',
+            'data' => 'array',
+            'files' => 'array',
+            'files.*' => 'file'
         ];
     }
 }

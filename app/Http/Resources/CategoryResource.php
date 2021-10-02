@@ -2,10 +2,10 @@
 
 namespace App\Http\Resources;
 
-use App\Models\Log;
+use App\Models\Category;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class LogResource extends JsonResource
+class CategoryResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,13 +15,10 @@ class LogResource extends JsonResource
      */
     public function toArray($request)
     {
-        /** @var Log $this */
+        /** @var Category $this */
         return [
             'id' => $this->id,
-            'message' => $this->message,
-            'category' => CategoryResource::make($this->category),
-            'data' => LogDataResource::make($this->data),
-            'files' => LogFilesResource::collection($this->files)
+            'name' => $this->name
         ];
     }
 }
