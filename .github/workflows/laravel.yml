@@ -24,12 +24,8 @@ jobs:
       run: php artisan key:generate
     - name: Устанавливаем права
       run: chmod -R 777 storage bootstrap/cache
-    - name: Create Database
-      run: |
-        mkdir -p database
-        touch database/database.sqlite
     - name: Выполняем тесты
       env:
         DB_CONNECTION: sqlite
         DB_DATABASE: ':memory:'
-      run: php artisan test
+      run: php vendor/bin/phpunit --colors --debug
