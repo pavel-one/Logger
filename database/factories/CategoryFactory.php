@@ -7,6 +7,14 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CategoryFactory extends Factory
 {
+    protected const CATEGORIES = [
+        'OCM',
+        'CTY',
+        'DS',
+        'Lab',
+        'Omoney'
+    ];
+
     /**
      * The name of the factory's corresponding model.
      *
@@ -22,7 +30,7 @@ class CategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => \Str::words(2)
+            'name' => $this->faker->randomElement(self::CATEGORIES)
         ];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Log;
 use App\Models\LogData;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -22,7 +23,7 @@ class LogDataFactory extends Factory
     public function definition()
     {
         return [
-            'content' => $this->faker->arrayOf(30)->city
+            'content' => $this->faker->randomElements(Log::getLevels(), 2, true)
         ];
     }
 }

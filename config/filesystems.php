@@ -42,6 +42,13 @@ return [
             'visibility' => 'public',
         ],
 
+        \App\Models\Log::STORAGE => [
+            'driver' => 'local',
+            'root' => storage_path('app/logs'),
+            'url' => env('APP_URL').'/log/file',
+            'visibility' => 'public',
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),

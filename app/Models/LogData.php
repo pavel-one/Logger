@@ -13,6 +13,8 @@ class LogData extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['content'];
+
     protected $casts = [
         'content' => 'array'
     ];

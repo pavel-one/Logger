@@ -11,6 +11,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class LogFile extends Model
 {
+    use HasFactory;
+
+    protected $fillable = [
+        'path',
+        'disk'
+    ];
+
     public function log(): BelongsTo
     {
         return $this->belongsTo(Log::class);
