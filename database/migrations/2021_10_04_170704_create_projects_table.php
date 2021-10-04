@@ -25,7 +25,9 @@ class CreateProjectsTable extends Migration
                 ->references('id')
                 ->on('projects')
                 ->cascadeOnDelete();
-            $table->dropForeign('categories_user_id_foreign');
+            if (DB::getDriverName() !== 'sqlite') {
+                $table->dropForeign('categories_user_id_foreign');
+            }
             $table->dropColumn('user_id');
         });
 
@@ -52,7 +54,9 @@ class CreateProjectsTable extends Migration
     public function down()
     {
         Schema::table('categories', function (Blueprint $table) {
-            $table->dropForeign('categories_project_id_foreign');
+            if (DB::getDriverName() !== 'sqlite') {
+                $table->dropForeign('categories_project_id_foreign');
+            }
         });
         Schema::dropIfExists('projects_users');
         Schema::dropIfExists('projects');
