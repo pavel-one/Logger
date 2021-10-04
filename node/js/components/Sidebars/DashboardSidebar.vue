@@ -1,6 +1,4 @@
 <template>
-	
-	<!-- Main Sidebar -->
 	<a-layout-sider
 		collapsible
 		class="sider-primary"
@@ -10,10 +8,12 @@
 		:collapsed="sidebarCollapsed"
 		@collapse="$emit('toggleSidebar', ! sidebarCollapsed)"
 		:trigger="null"
-		:class="['ant-layout-sider-' + sidebarColor, 'ant-layout-sider-' + sidebarTheme]"
+		:class="['ant-layout-sider-light', 'ant-layout-sider-white']"
 		theme="light"
 		:style="{ backgroundColor: 'transparent',}">
-			<div class="brand"><img src="images/logo-ct-black.png" alt=""> <span>Muse Dashboard</span></div>
+			<div class="brand">
+                LOGGER
+            </div>
 			<hr>
 
 			<!-- Sidebar Navigation Menu -->
@@ -27,7 +27,7 @@
 								<path d="M14 9C13.4477 9 13 9.44771 13 10V16C13 16.5523 13.4477 17 14 17H16C16.5523 17 17 16.5523 17 16V10C17 9.44771 16.5523 9 16 9H14Z" fill="#111827"/>
 							</svg>
 						</span>
-						<span class="label">Dashboard</span>
+						<span class="label">Панель</span>
 					</router-link>
 				</a-menu-item>
 				<a-menu-item>
@@ -63,7 +63,7 @@
 					</router-link>
 				</a-menu-item>
 				<a-menu-item class="menu-item-header">
-					Account Pages
+					Мой профиль
 				</a-menu-item>
 				<a-menu-item>
 					<router-link to="/profile">
@@ -147,13 +147,13 @@
 				type: Boolean,
 				default: false,
 			},
-			
+
 			// Main sidebar color.
 			sidebarColor: {
 				type: String,
 				default: "primary",
 			},
-			
+
 			// Main sidebar theme : light, white, dark.
 			sidebarTheme: {
 				type: String,
