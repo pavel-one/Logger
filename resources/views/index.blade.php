@@ -9,7 +9,9 @@
     <title>Test</title>
 </head>
 <body>
-    <p>test</p>
+<div id="app">
+    <app></app>
+</div>
 </body>
 <script src="{{asset('js/app.js')}}"></script>
 </html>
