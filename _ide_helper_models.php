@@ -100,6 +100,7 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Log $log
+ * @method static \Database\Factories\LogFileFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|LogFile newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|LogFile newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|LogFile query()
@@ -112,6 +113,26 @@ namespace App\Models{
  * @mixin \Eloquent
  */
 	class IdeHelperLogFile extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Project
+ *
+ * @property int $id
+ * @property string $name
+ * @property string|null $created_at
+ * @property string|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Project newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Project newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Project query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
+	class IdeHelperProject extends \Eloquent {}
 }
 
 namespace App\Models{
