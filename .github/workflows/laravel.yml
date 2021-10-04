@@ -31,5 +31,5 @@ jobs:
     - name: Выполняем тесты
       env:
         DB_CONNECTION: sqlite
-        DB_DATABASE: database/database.sqlite
+        DB_DATABASE: ':memory:'
       run: php artisan test
