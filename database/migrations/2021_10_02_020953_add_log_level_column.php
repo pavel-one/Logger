@@ -14,7 +14,7 @@ class AddLogLevelColumn extends Migration
     public function up()
     {
         Schema::table('logs', function (Blueprint $table) {
-            $table->smallInteger('level')->index();
+            $table->integer('level')->index();
         });
     }
 
