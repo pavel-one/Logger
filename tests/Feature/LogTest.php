@@ -89,6 +89,8 @@ class LogTest extends TestCase
      */
     public function test_createFullLog()
     {
+        \Storage::fake(Log::STORAGE);
+
         /** @var Log $log */
         $log = Log::factory()->make();
         /** @var Category $category */
@@ -102,8 +104,9 @@ class LogTest extends TestCase
                 'category' => $category->name,
                 'data' => Log::getLevels(),
                 'files' => [
+                    UploadedFile::fake()->create('test.php'),
                     UploadedFile::fake()->image('photo1.png'),
-                    UploadedFile::fake()->create('test.txt')
+                    UploadedFile::fake()->create('test.txt'),
                 ]
             ],
             ['HTTP_Authorization' => "Bearer {$this->getToken()}"]
@@ -122,5 +125,10 @@ class LogTest extends TestCase
         $this->assertEquals(1, $category->logs()->count());
         $this->assertEquals(1, $log->data()->count());
         $this->assertEquals(2, $log->files()->count());
+
+        foreach ($log->files as $file) {
+            \Storage::disk(Log::STORAGE)->assertExists($file->path);
+        }
+
     }
 }

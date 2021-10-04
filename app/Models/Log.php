@@ -22,6 +22,8 @@ class Log extends Model
     public const LOG_ERROR = 'error';
     public const LOG_FATAL = 'fatal';
 
+    public const STORAGE = 'log';
+
     protected $fillable = [
         'message',
         'level',

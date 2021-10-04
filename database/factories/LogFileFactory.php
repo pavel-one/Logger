@@ -2,18 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Log;
-use App\Models\LogData;
+use App\Models\LogFile;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class LogDataFactory extends Factory
+class LogFileFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = LogData::class;
+    protected $model = LogFile::class;
 
     /**
      * Define the model's default state.
@@ -23,7 +22,8 @@ class LogDataFactory extends Factory
     public function definition()
     {
         return [
-            'content' => $this->faker->randomElements(Log::getLevels(), 2, true)
+            'path' => $this->faker->filePath(),
+            'disk' => $this->faker->randomElement(array_keys(config('filesystems.disks')))
         ];
     }
 }

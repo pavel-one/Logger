@@ -6,14 +6,12 @@ use App\Http\Requests\CreateLogRequest;
 use App\Http\Resources\LogResource;
 use App\Models\Category;
 use App\Models\Log;
-use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 
 class LogController extends Controller
 {
     public function create(CreateLogRequest $request): LogResource
     {
-        //TODO: Проверять эти штуки и создавать
-        //TODO: Трансформировать статус
         $user = \Auth::user();
         $level = Log::getLevelId($request->get('level'));
         $message = trim(htmlspecialchars($request->get('message')));
@@ -31,6 +29,22 @@ class LogController extends Controller
             $log->data()->create([
                 'content' => $data
             ]);
+        }
+
+        if ($files = $request->allFiles()) {
+            /** @var UploadedFile $file */
+            foreach ($files['files'] as $file) {
+                if ($file->getMimeType() === 'application/x-php') {
+                    continue;
+                }
+
+                $log->files()->create([
+                    'path' => $user->id . DIRECTORY_SEPARATOR . $file->hashName(),
+                    'disk' => Log::STORAGE
+                ]);
+
+                \Storage::disk(Log::STORAGE)->putFile($user->id, $file);
+            }
         }
 
 
