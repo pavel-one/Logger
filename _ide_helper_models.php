@@ -16,12 +16,12 @@ namespace App\Models{
  *
  * @property int $id
  * @property string $name
- * @property int $user_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property int $project_id
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Log[] $logs
  * @property-read int|null $logs_count
- * @property-read \App\Models\User $user
+ * @property-read \App\Models\Project $project
  * @method static \Database\Factories\CategoryFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Category newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Category newQuery()
@@ -29,8 +29,8 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Category whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Category whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Category whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Category whereProjectId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Category whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Category whereUserId($value)
  * @mixin \Eloquent
  */
 	class IdeHelperCategory extends \Eloquent {}
@@ -123,6 +123,7 @@ namespace App\Models{
  * @property string $name
  * @property string|null $created_at
  * @property string|null $updated_at
+ * @method static \Database\Factories\ProjectFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Project newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Project newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Project query()
@@ -133,6 +134,26 @@ namespace App\Models{
  * @mixin \Eloquent
  */
 	class IdeHelperProject extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\ProjectsUsers
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property int $project_id
+ * @property-read \App\Models\Project|null $project
+ * @property-read \App\Models\User|null $user
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectsUsers newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectsUsers newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectsUsers query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectsUsers whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectsUsers whereProjectId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectsUsers whereUserId($value)
+ * @mixin \Eloquent
+ */
+	class IdeHelperProjectsUsers extends \Eloquent {}
 }
 
 namespace App\Models{
