@@ -1,8 +1,6 @@
 {
     "watch": [
-        "node/server.js",
-        "node/js/*",
-        "node/scss/*"
+        "node/server.js"
     ],
     "ext": "js, scss"
 }
