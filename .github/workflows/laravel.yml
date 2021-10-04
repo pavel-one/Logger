@@ -28,4 +28,4 @@ jobs:
       env:
         DB_CONNECTION: sqlite
         DB_DATABASE: ':memory:'
-      run: php vendor/bin/phpunit --colors --debug
+      run: php artisan migrate
