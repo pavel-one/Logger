@@ -35,9 +35,18 @@ class AuthController extends Controller
         return Socialite::driver(UserSocial::GITHUB_PROVIDER)->redirect();
     }
 
-    public function githubCallback(Request $request): RedirectResponse
+    public function githubCallback(Request $request): UserResource
     {
-        $user = Socialite::driver(UserSocial::GITHUB_PROVIDER)->user();
-        dd($user);
+        try {
+            $socialUser = Socialite::driver(UserSocial::GITHUB_PROVIDER)->user();
+        } catch (\Exception $e) {
+            abort(404);
+        }
+
+        if (!$socialUser) {
+            abort(404);
+        }
+
+        return UserResource::make(User::createWithSocial($socialUser, UserSocial::GITHUB_PROVIDER));
     }
 }

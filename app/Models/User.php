@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Sanctum\PersonalAccessToken;
+use \Laravel\Socialite\Two\User as SocialUser;
 
 /**
  * @mixin IdeHelperUser
@@ -28,6 +29,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'avatar',
         'password',
     ];
 
@@ -57,6 +59,37 @@ class User extends Authenticatable
             'email' => 'required|email|unique:users',
             'password' => 'required|string|min:6'
         ];
+    }
+
+    public static function createWithSocial(SocialUser $socialUser, string $provider): self
+    {
+        $user = User::whereEmail($socialUser->getEmail())->first();
+
+        if (!$user) {
+            /** @var self $user */
+            $user = self::create([
+                'name' => $socialUser->getName(),
+                'email' => $socialUser->getEmail(),
+                'avatar' => $socialUser->getAvatar(),
+                'password' => \Str::random(12),
+            ]);
+        }
+
+        $social = $user->socials()->where('provider', '=', $provider)->first();
+        $socialData = [
+            'social_id' => $socialUser->getId(),
+            'provider' => $provider,
+            'token' => $socialUser->token,
+            'info' => $socialUser->user
+        ];
+
+        if (!$social) {
+            $user->socials()->create($socialData);
+        } else {
+            $social->update($socialData);
+        }
+
+        return $user;
     }
 
     public function categories(): HasMany
