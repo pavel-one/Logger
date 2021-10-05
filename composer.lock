@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9e3cae0b307845b68f51f245794d07a3",
+    "content-hash": "56af09cbc8d9db2b20f3f723fcae8fc0",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3044,6 +3044,53 @@
                 "source": "https://github.com/SocialiteProviders/Manager/tree/4.0.1"
             },
             "time": "2020-12-01T23:09:06+00:00"
+        },
+        {
+            "name": "socialiteproviders/telegram",
+            "version": "4.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SocialiteProviders/Telegram.git",
+                "reference": "7097d79bd85e04e80447405db83ab28a3ec2b494"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SocialiteProviders/Telegram/zipball/7097d79bd85e04e80447405db83ab28a3ec2b494",
+                "reference": "7097d79bd85e04e80447405db83ab28a3ec2b494",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2 || ^8.0",
+                "socialiteproviders/manager": "~4.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "Socialite": "Laravel\\Socialite\\Facades\\Socialite"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "SocialiteProviders\\Telegram\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Adnan RIHAN",
+                    "email": "adnan@rihan.fr"
+                }
+            ],
+            "description": "Telegram Authentication Provider for Laravel Socialite",
+            "support": {
+                "source": "https://github.com/SocialiteProviders/Telegram/tree/4.1.2"
+            },
+            "time": "2021-07-09T00:49:27+00:00"
         },
         {
             "name": "socialiteproviders/vkontakte",

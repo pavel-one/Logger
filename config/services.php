@@ -48,6 +48,13 @@ return [
         'client_id' => env('VKONTAKTE_CLIENT_ID'),
         'client_secret' => env('VKONTAKTE_CLIENT_SECRET'),
         'redirect' => env('APP_URL') . '/social/vk-callback'
+    ],
+
+    UserSocial::TELEGRAM_PROVIDER => [
+        'bot' => env('TELEGRAM_BOT_NAME'),  // The bot's username
+        'client_id' => null,
+        'client_secret' => env('TELEGRAM_TOKEN'),
+        'redirect' => env('APP_URL') . '/social/telegram-callback',
     ]
 
 ];

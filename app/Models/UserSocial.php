@@ -14,6 +14,7 @@ class UserSocial extends Model
     public const GITHUB_PROVIDER = 'github';
     public const YANDEX_PROVIDER = 'yandex';
     public const VK_PROVIDER = 'vkontakte';
+    public const TELEGRAM_PROVIDER = 'telegram';
 
     protected $fillable = [
         'social_id',
