@@ -1,17 +1,14 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SiteController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+Route::prefix('social')->group(function () {
+    Route::get('github', [AuthController::class, 'githubAuth'])
+        ->name('github.auth');
+    Route::get('github-callback', [AuthController::class, 'githubCallback'])
+        ->name('github.callback');
+});
 
-Route::get('/{any}', [SiteController::class, 'spa'])->where('any', '^(?!api).*$');
+Route::get('/{any}', [SiteController::class, 'spa'])->where('any', '^(?!api|social).*$');

@@ -17,7 +17,7 @@
 				<h5 class="font-semibold text-center">Регистрация</h5>
 			</template>
 			<div class="sign-up-gateways">
-    			<a-button>
+    			<a-button @click="redirectGithub">
                     <a-icon type="github" />
 				</a-button>
     			<a-button>
@@ -109,6 +109,9 @@
 					}
 				});
 			},
+            redirectGithub: function () {
+                window.location.href = '/social/github'
+            }
 		},
 	})
 
