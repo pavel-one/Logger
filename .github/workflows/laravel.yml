@@ -17,6 +17,8 @@ jobs:
           POSTGRES_DB: test
           POSTGRES_USER: test
           POSTGRES_PASSWORD: test
+        ports:
+          - 5432:5432
     steps:
       - uses: actions/checkout@v2
       - name: Копирую .env
@@ -28,4 +30,6 @@ jobs:
       - name: Права
         run: chmod -R 777 storage bootstrap/cache
       - name: Запуск тестов
+        env:
+          DB_HOST: localhost
         run: php artisan test
