@@ -38,4 +38,10 @@ return [
         'redirect' => env('APP_URL') . '/social/github-callback',
     ],
 
+    UserSocial::YANDEX_PROVIDER => [
+        'client_id' => env('YANDEX_CLIENT_ID'),
+        'client_secret' => env('YANDEX_CLIENT_SECRET'),
+        'redirect' => env('APP_URL') . '/social/yandex-callback'
+    ]
+
 ];

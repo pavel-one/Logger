@@ -49,4 +49,24 @@ class AuthController extends Controller
 
         return UserResource::make(User::createWithSocial($socialUser, UserSocial::GITHUB_PROVIDER));
     }
+
+    public function yandexAuth(): RedirectResponse
+    {
+        return Socialite::driver(UserSocial::YANDEX_PROVIDER)->redirect();
+    }
+
+    public function yandexCallback(): UserResource
+    {
+        try {
+            $socialUser = Socialite::driver(UserSocial::YANDEX_PROVIDER)->user();
+        } catch (\Exception $e) {
+            abort(404);
+        }
+
+        if (!$socialUser) {
+            abort(404);
+        }
+
+        return UserResource::make(User::createWithSocial($socialUser, UserSocial::YANDEX_PROVIDER));
+    }
 }

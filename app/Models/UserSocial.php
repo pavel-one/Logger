@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class UserSocial extends Model
 {
     public const GITHUB_PROVIDER = 'github';
+    public const YANDEX_PROVIDER = 'yandex';
 
     protected $fillable = [
         'social_id',
