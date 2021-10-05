@@ -172,18 +172,22 @@ namespace App\Models{
  * @property string|null $remember_token
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string|null $avatar
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Category[] $categories
  * @property-read int|null $categories_count
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read int|null $notifications_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Project[] $projects
  * @property-read int|null $projects_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\UserSocial[] $socials
+ * @property-read int|null $socials_count
  * @property-read \Illuminate\Database\Eloquent\Collection|PersonalAccessToken[] $tokens
  * @property-read int|null $tokens_count
  * @method static \Database\Factories\UserFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|User query()
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereAvatar($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereEmail($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereEmailVerifiedAt($value)
@@ -195,5 +199,34 @@ namespace App\Models{
  * @mixin \Eloquent
  */
 	class IdeHelperUser extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\UserSocial
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property string $social_id
+ * @property string $provider
+ * @property string|null $token
+ * @property array|null $info
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|UserSocial newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|UserSocial newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|UserSocial query()
+ * @method static \Illuminate\Database\Eloquent\Builder|UserSocial whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserSocial whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserSocial whereInfo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserSocial whereProvider($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserSocial whereSocialId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserSocial whereToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserSocial whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserSocial whereUserId($value)
+ * @mixin \Eloquent
+ */
+	class IdeHelperUserSocial extends \Eloquent {}
 }
 

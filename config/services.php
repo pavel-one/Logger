@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\UserSocial;
+
 return [
 
     /*
@@ -30,7 +32,7 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
-    'github' => [
+    UserSocial::GITHUB_PROVIDER => [
         'client_id' => env('GITHUB_CLIENT_ID'),
         'client_secret' => env('GITHUB_CLIENT_SECRET'),
         'redirect' => env('APP_URL') . '/social/github-callback',

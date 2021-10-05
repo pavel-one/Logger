@@ -6,6 +6,7 @@ use App\Http\Requests\CreateUserRequest;
 use App\Http\Resources\TokenResource;
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use App\Models\UserSocial;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
@@ -31,12 +32,12 @@ class AuthController extends Controller
 
     public function githubAuth(): RedirectResponse
     {
-        return Socialite::driver('github')->redirect();
+        return Socialite::driver(UserSocial::GITHUB_PROVIDER)->redirect();
     }
 
     public function githubCallback(Request $request): RedirectResponse
     {
-        $user = Socialite::driver('github')->user();
+        $user = Socialite::driver(UserSocial::GITHUB_PROVIDER)->user();
         dd($user);
     }
 }

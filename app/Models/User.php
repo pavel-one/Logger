@@ -73,4 +73,9 @@ class User extends Authenticatable
             'project_id',
         );
     }
+
+    public function socials(): HasMany
+    {
+        return $this->hasMany(UserSocial::class);
+    }
 }
