@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\Category;
 use App\Models\Log;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
@@ -18,19 +19,22 @@ class LogTest extends TestCase
      */
     public function test_createSimpleLog()
     {
+        $token = $this->getToken();
+        $project = $this->getProjectId($token);
+
         /** @var Log $log */
         $log = Log::factory()->make();
         /** @var Category $category */
         $category = Category::factory()->make();
 
         $response = $this->post(
-            route('create.log'),
+            route('create.log', compact('project')),
             [
                 'level' => Log::getLevelName($log->level),
                 'message' => $log->message,
                 'category' => $category->name,
             ],
-            ['HTTP_Authorization' => "Bearer {$this->getToken()}"]
+            ['HTTP_Authorization' => "Bearer {$token}"]
         );
 
         $response->assertStatus(201);
@@ -53,20 +57,23 @@ class LogTest extends TestCase
      */
     public function test_createDataLog()
     {
+        $token = $this->getToken();
+        $project = $this->getProjectId($token);
+
         /** @var Log $log */
         $log = Log::factory()->make();
         /** @var Category $category */
         $category = Category::factory()->make();
 
         $response = $this->post(
-            route('create.log'),
+            route('create.log', $project),
             [
                 'level' => Log::getLevelName($log->level),
                 'message' => $log->message,
                 'category' => $category->name,
                 'data' => Log::getLevels()
             ],
-            ['HTTP_Authorization' => "Bearer {$this->getToken()}"]
+            ['HTTP_Authorization' => "Bearer {$token}"]
         );
 
         $response->assertStatus(201);
@@ -89,6 +96,9 @@ class LogTest extends TestCase
      */
     public function test_createFullLog()
     {
+        $token = $this->getToken();
+        $project = $this->getProjectId($token);
+
         \Storage::fake(Log::STORAGE);
 
         /** @var Log $log */
@@ -97,7 +107,7 @@ class LogTest extends TestCase
         $category = Category::factory()->make();
 
         $response = $this->post(
-            route('create.log'),
+            route('create.log', $project),
             [
                 'level' => Log::getLevelName($log->level),
                 'message' => $log->message,
@@ -109,7 +119,7 @@ class LogTest extends TestCase
                     UploadedFile::fake()->create('test.txt'),
                 ]
             ],
-            ['HTTP_Authorization' => "Bearer {$this->getToken()}"]
+            ['HTTP_Authorization' => "Bearer {$token}"]
         );
 
         $response->assertStatus(201);
@@ -130,5 +140,16 @@ class LogTest extends TestCase
             \Storage::disk(Log::STORAGE)->assertExists($file->path);
         }
 
+    }
+
+    protected function getProjectId($token): int
+    {
+        $response = $this->post(route('create.project'), [
+            'name' => 'Тестовый проект',
+            'users' => [
+                User::first()->id
+            ]
+        ], ['HTTP_Authorization' => "Bearer {$token}"]);
+        return (int) $response->json()['data']['id'];
     }
 }

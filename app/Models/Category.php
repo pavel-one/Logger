@@ -16,9 +16,9 @@ class Category extends Model
 
     protected $fillable = ['name'];
 
-    public function user(): BelongsTo
+    public function project(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Project::class, 'id', 'project_id');
     }
 
     public function logs(): HasMany

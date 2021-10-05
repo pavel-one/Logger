@@ -8,9 +8,18 @@ on:
 
 jobs:
   laravel-tests:
-
     runs-on: ubuntu-latest
-
+    container:
+      image: kirschbaumdevelopment/laravel-test-runner:8.0
+    services:
+      db_test:
+        image: postgres:alpine
+        env:
+          POSTGRES_DB: test
+          POSTGRES_USER: test
+          POSTGRES_PASSWORD: test
+        ports:
+          - 5432:5432
     steps:
       - uses: actions/checkout@v2
       - name: Копирую .env
@@ -21,15 +30,5 @@ jobs:
         run: php artisan key:generate
       - name: Права
         run: chmod -R 777 storage bootstrap/cache
-      - name: Создание БД
-        run: |
-          mkdir -p database
-          touch database/database.sqlite
       - name: Запуск тестов
-        env:
-          DB_CONNECTION: sqlite
-          DB_DATABASE: database/database.sqlite
-          CACHE_DRIVER: array
-          SESSION_DRIVER: array
-          QUEUE_DRIVER: sync
         run: php artisan test

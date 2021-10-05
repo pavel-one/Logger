@@ -16,12 +16,12 @@ namespace App\Models{
  *
  * @property int $id
  * @property string $name
- * @property int $user_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property int $project_id
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Log[] $logs
  * @property-read int|null $logs_count
- * @property-read \App\Models\User $user
+ * @property-read \App\Models\Project $project
  * @method static \Database\Factories\CategoryFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Category newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Category newQuery()
@@ -29,8 +29,8 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Category whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Category whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Category whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Category whereProjectId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Category whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Category whereUserId($value)
  * @mixin \Eloquent
  */
 	class IdeHelperCategory extends \Eloquent {}
@@ -100,6 +100,7 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Log $log
+ * @method static \Database\Factories\LogFileFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|LogFile newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|LogFile newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|LogFile query()
@@ -112,6 +113,51 @@ namespace App\Models{
  * @mixin \Eloquent
  */
 	class IdeHelperLogFile extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Project
+ *
+ * @property int $id
+ * @property string $name
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Category[] $categories
+ * @property-read int|null $categories_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $users
+ * @property-read int|null $users_count
+ * @method static \Database\Factories\ProjectFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Project newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Project query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
+	class IdeHelperProject extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\ProjectsUsers
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property int $project_id
+ * @property-read \App\Models\Project|null $project
+ * @property-read \App\Models\User|null $user
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectsUsers newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectsUsers newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectsUsers query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectsUsers whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectsUsers whereProjectId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectsUsers whereUserId($value)
+ * @mixin \Eloquent
+ */
+	class IdeHelperProjectsUsers extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -130,6 +176,8 @@ namespace App\Models{
  * @property-read int|null $categories_count
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read int|null $notifications_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Project[] $projects
+ * @property-read int|null $projects_count
  * @property-read \Illuminate\Database\Eloquent\Collection|PersonalAccessToken[] $tokens
  * @property-read int|null $tokens_count
  * @method static \Database\Factories\UserFactory factory(...$parameters)

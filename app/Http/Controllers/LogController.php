@@ -6,21 +6,24 @@ use App\Http\Requests\CreateLogRequest;
 use App\Http\Resources\LogResource;
 use App\Models\Category;
 use App\Models\Log;
+use App\Models\Project;
 use Illuminate\Http\UploadedFile;
 
 class LogController extends Controller
 {
-    public function create(CreateLogRequest $request): LogResource
+    public function create(CreateLogRequest $request, $project): LogResource
     {
+        $project = Project::whereId($project)->firstOrFail();
         $user = \Auth::user();
         $level = Log::getLevelId($request->get('level'));
         $message = trim(htmlspecialchars($request->get('message')));
         $categoryName = $request->get('category');
 
         /** @var Category $category */
-        $category = $user->categories()->firstOrCreate([
+        $category = $project->categories()->firstOrCreate([
             'name' => $categoryName
         ]);
+
 
         /** @var Log $log */
         $log = $category->logs()->create(compact('level', 'message'));
