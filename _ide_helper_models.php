@@ -121,8 +121,12 @@ namespace App\Models{
  *
  * @property int $id
  * @property string $name
- * @property string|null $created_at
- * @property string|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Category[] $categories
+ * @property-read int|null $categories_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $users
+ * @property-read int|null $users_count
  * @method static \Database\Factories\ProjectFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Project newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Project newQuery()
@@ -172,6 +176,8 @@ namespace App\Models{
  * @property-read int|null $categories_count
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read int|null $notifications_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Project[] $projects
+ * @property-read int|null $projects_count
  * @property-read \Illuminate\Database\Eloquent\Collection|PersonalAccessToken[] $tokens
  * @property-read int|null $tokens_count
  * @method static \Database\Factories\UserFactory factory(...$parameters)

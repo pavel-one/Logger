@@ -15,6 +15,10 @@ class Project extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name'
+    ];
+
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(

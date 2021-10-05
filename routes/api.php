@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LogController;
+use App\Http\Controllers\ProjectController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,7 +26,14 @@ Route::prefix('auth')->group(function () {
 });
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/user', [AuthController::class, 'user'])->name('get.user');
+    Route::get('user', [AuthController::class, 'user'])->name('get.user');
 
-    Route::post('log', [LogController::class, 'create'])->name('create.log');
+    Route::post('project', [ProjectController::class, 'create'])
+        ->name('create.project');
+
+    Route::prefix('{project}')->group(function () {
+        Route::post('log', [LogController::class, 'create'])
+            ->name('create.log');
+    });
+
 });
