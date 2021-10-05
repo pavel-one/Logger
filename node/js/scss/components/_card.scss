@@ -1,7 +1,7 @@
 // _card.scss
-// 
+//
 // Template's cards styles.
-// 
+//
 
 // Cards
 
@@ -70,7 +70,7 @@
 		flex-grow: 1;
 		flex-shrink: 0;
 		margin-top: 20px;
-				
+
 		@media( min-width: $xl ){
 			width: auto;
 			flex-shrink: 1;
@@ -87,7 +87,7 @@
 		box-shadow: $shadow-2;
 		position: relative;
 		overflow: hidden;
-				
+
 		@media( min-width: $xl ){
 			width: 220px;
 			height: 220px;
@@ -185,7 +185,7 @@
 		align-items: center;
 		justify-content: space-between;
 	}
-	
+
 	h6 {
 		font-weight: $fw-semibold;
 		margin-bottom: 0;
@@ -304,18 +304,20 @@
 .card-signup {
 	width: 100%;
 	max-width: 500px;
-	margin: auto;
-	box-shadow: $shadow-1;
+    box-shadow: $shadow-1;
 	border-radius: 12px;
-	margin-top: -190px;
-	margin-bottom: 20px;
-			
-	@media( min-width: $md ) {
+    margin: -290px auto 20px;
+
+    @media( min-width: $md ) {
 		margin-bottom: 120px;
 	}
 
 	.sign-up-gateways {
 		text-align: center;
+
+        .anticon {
+            font-size: 2.2em;
+        }
 
 		.ant-btn {
 			margin-right: 10px;
@@ -323,7 +325,7 @@
 			height: 60px;
 			width: 70px;
 			box-shadow: none;
-			
+
 			@media( min-width: $md ) {
 				width: 100px;
 			}
