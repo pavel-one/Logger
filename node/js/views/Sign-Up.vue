@@ -60,18 +60,18 @@
 				<a-form-item class="mb-10">
 					<a-input
 						v-decorator="[
-						'name',
-						{ rules: [{ required: true, message: 'Please input your name!' }] },
+                            'name',
+                            { rules: [{ required: true, message: 'Пожалуйста, введите ваше имя' }] },
 						]"
-						placeholder="Name"
+						placeholder="Имя"
 					>
 					</a-input>
 				</a-form-item>
 				<a-form-item class="mb-10">
 					<a-input
 						v-decorator="[
-						'email',
-						{ rules: [{ required: true, message: 'Please input your email!' }] },
+                            'email',
+                            { rules: [{ required: true, message: 'Пожалуйста, введите ваш email' }] },
 						]"
 						placeholder="Email"
 					>
@@ -80,22 +80,19 @@
 				<a-form-item class="mb-5">
 					<a-input
 						v-decorator="[
-						'password',
-						{ rules: [{ required: true, message: 'Please input your Password!' }] },
+                            'password',
+                            { rules: [{ required: true, message: 'Пароль обязателен' }] },
 						]"
 						type="password"
-						placeholder="Password"
+						placeholder="Пароль"
 					>
 					</a-input>
 				</a-form-item>
 				<a-form-item class="mb-10">
 					<a-checkbox
 						v-decorator="[
-						'remember',
-						{
-							valuePropName: 'checked',
-							initialValue: true,
-						},
+                            'agreement',
+                            { rules: [{ required: true, message: 'Согласие обязательно' }] },
 						]"
 					>
 						Я согласен на все согласия
@@ -122,11 +119,9 @@
 			}
 		},
 		beforeCreate() {
-			// Creates the form and adds to it component's "form" property.
-			this.form = this.$form.createForm(this, { name: 'normal_login' });
+			this.form = this.$form.createForm(this, { name: 'register' });
 		},
-		methods: {
-			// Handles input validation after submission.
+        methods: {
 			handleSubmit(e) {
 				e.preventDefault();
 				this.form.validateFields((err, values) => {
