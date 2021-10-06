@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Sanctum\PersonalAccessToken;
+use \Laravel\Socialite\Two\User as SocialUser;
 
 /**
  * @mixin IdeHelperUser
@@ -28,6 +29,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'avatar',
         'password',
     ];
 
@@ -59,6 +61,38 @@ class User extends Authenticatable
         ];
     }
 
+    public static function createWithSocial(SocialUser $socialUser, string $provider): self
+    {
+        $email = $socialUser->getEmail() ?? $provider . '-' . $socialUser->getId() . '@logger.pavel.one';
+        $user = User::whereEmail($email)->first();
+
+        if (!$user) {
+            /** @var self $user */
+            $user = self::create([
+                'name' => $socialUser->getName(),
+                'email' => $email,
+                'avatar' => $socialUser->getAvatar(),
+                'password' => \Str::random(12),
+            ]);
+        }
+
+        $social = $user->socials()->where('provider', '=', $provider)->first();
+        $socialData = [
+            'social_id' => $socialUser->getId(),
+            'provider' => $provider,
+            'token' => $socialUser->token,
+            'info' => $socialUser->user
+        ];
+
+        if (!$social) {
+            $user->socials()->create($socialData);
+        } else {
+            $social->update($socialData);
+        }
+
+        return $user;
+    }
+
     public function categories(): HasMany
     {
         return $this->hasMany(Category::class, 'user_id', 'id');
@@ -72,5 +106,10 @@ class User extends Authenticatable
             'user_id',
             'project_id',
         );
+    }
+
+    public function socials(): HasMany
+    {
+        return $this->hasMany(UserSocial::class);
     }
 }

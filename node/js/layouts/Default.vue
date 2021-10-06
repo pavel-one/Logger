@@ -1,4 +1,4 @@
-<!-- 
+<!--
 	This is the default layout, used in sign-in and sign-up pages.
  -->
 
@@ -7,11 +7,6 @@
 
 		<!-- Default Layout -->
 		<a-layout class="layout-default" id="layout-default" :class="[layoutClass]">
-
-			<!-- Layout Header ( Navbar ) -->
-			<DefaultHeader></DefaultHeader>
-			<!-- / Layout Header ( Navbar ) -->
-
 
 			<!-- Page Content -->
 			<a-layout-content>
@@ -31,12 +26,10 @@
 
 <script>
 
-	import DefaultHeader from '../components/Headers/DefaultHeader' ;
 	import DefaultFooter from '../components/Footers/DefaultFooter' ;
 
 	export default ({
 		components: {
-			DefaultHeader,
 			DefaultFooter,
 		},
 		data() {

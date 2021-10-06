@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\UserSocial;
+
 return [
 
     /*
@@ -29,5 +31,30 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
+
+    UserSocial::GITHUB_PROVIDER => [
+        'client_id' => env('GITHUB_CLIENT_ID'),
+        'client_secret' => env('GITHUB_CLIENT_SECRET'),
+        'redirect' => env('APP_URL') . '/social/github-callback',
+    ],
+
+    UserSocial::YANDEX_PROVIDER => [
+        'client_id' => env('YANDEX_CLIENT_ID'),
+        'client_secret' => env('YANDEX_CLIENT_SECRET'),
+        'redirect' => env('APP_URL') . '/social/yandex-callback'
+    ],
+
+    UserSocial::VK_PROVIDER => [
+        'client_id' => env('VKONTAKTE_CLIENT_ID'),
+        'client_secret' => env('VKONTAKTE_CLIENT_SECRET'),
+        'redirect' => env('APP_URL') . '/social/vk-callback'
+    ],
+
+    UserSocial::TELEGRAM_PROVIDER => [
+        'bot' => env('TELEGRAM_BOT_NAME'),
+        'client_id' => null,
+        'client_secret' => env('TELEGRAM_TOKEN'),
+        'redirect' => env('APP_URL') . '/social/telegram-callback',
+    ]
 
 ];
