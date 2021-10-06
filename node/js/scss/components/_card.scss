@@ -347,13 +347,11 @@
     .sign-up-gateways {
         text-align: center;
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
         flex-wrap: wrap;
 
         .ant-btn {
-            margin-right: 10px;
-            margin-left: 10px;
             height: 60px;
             width: 70px;
             box-shadow: none;
@@ -367,35 +365,49 @@
                 width: 100px;
             }
 
+            .social-logo {
+                width: 31px;
+                .st0 {
+                    fill: #999999;
+                }
+            }
+
             img {
                 width: 31px;
             }
 
-            &:focus, &:active, &:hover {
-                .anticon {
-                    color: black;
+            .yandex-logo {
+                .st1 {
+                    fill: #FFFFFF;
                 }
             }
 
             &:hover {
+                .vk-logo {
+                    .st0 {
+                        fill: #2787F5;
+                    }
+                }
+
+                .telegram-logo {
+                    .st0 {
+                        fill: url(#linearGradient-1);
+                    }
+                }
+
                 .yandex-logo {
                     .st0 {
                         fill: #FC3F1D;
                     }
-
                     .st1 {
                         fill: #FFFFFF;
                     }
                 }
             }
 
-            .yandex-logo {
-                width: 31px;
-                .st0 {
-                    fill: #999999;
-                }
-                .st1 {
-                    fill: #FFFFFF;
+            &:focus, &:active, &:hover {
+                .anticon {
+                    color: black;
                 }
             }
 

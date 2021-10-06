@@ -69,4 +69,44 @@ class AuthController extends Controller
 
         return UserResource::make(User::createWithSocial($socialUser, UserSocial::YANDEX_PROVIDER));
     }
+
+    public function vkAuth(): RedirectResponse
+    {
+        return Socialite::driver(UserSocial::VK_PROVIDER)->redirect();
+    }
+
+    public function vkCallback(): UserResource
+    {
+        try {
+            $socialUser = Socialite::driver(UserSocial::VK_PROVIDER)->user();
+        } catch (\Exception $e) {
+            abort(404);
+        }
+
+        if (!$socialUser) {
+            abort(404);
+        }
+
+        return UserResource::make(User::createWithSocial($socialUser, UserSocial::VK_PROVIDER));
+    }
+
+    public function telegramAuth()
+    {
+        return Socialite::driver(UserSocial::TELEGRAM_PROVIDER)->redirect();
+    }
+
+    public function telegramCallback(): UserResource
+    {
+        try {
+            $socialUser = Socialite::driver(UserSocial::TELEGRAM_PROVIDER)->user();
+        } catch (\Exception $e) {
+            abort(404);
+        }
+
+        if (!$socialUser) {
+            abort(404);
+        }
+
+        return UserResource::make(User::createWithSocial($socialUser, UserSocial::TELEGRAM_PROVIDER));
+    }
 }

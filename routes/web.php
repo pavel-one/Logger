@@ -14,6 +14,16 @@ Route::prefix('social')->group(function () {
         ->name('yandex.auth');
     Route::get('yandex-callback', [AuthController::class, 'yandexCallback'])
         ->name('yandex.callback');
+
+    Route::get('vk', [AuthController::class, 'vkAuth'])
+        ->name('vk.auth');
+    Route::get('vk-callback', [AuthController::class, 'vkCallback'])
+        ->name('vk.callback');
+
+    Route::get('telegram', [AuthController::class, 'telegramAuth'])
+        ->name('telegram.auth');
+    Route::get('telegram-callback', [AuthController::class, 'telegramCallback'])
+        ->name('telegram.callback');
 });
 
 Route::get('/{any}', [SiteController::class, 'spa'])->where('any', '^(?!api|social).*$');

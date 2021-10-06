@@ -63,13 +63,14 @@ class User extends Authenticatable
 
     public static function createWithSocial(SocialUser $socialUser, string $provider): self
     {
-        $user = User::whereEmail($socialUser->getEmail())->first();
+        $email = $socialUser->getEmail() ?? $provider . '-' . $socialUser->getId() . '@logger.pavel.one';
+        $user = User::whereEmail($email)->first();
 
         if (!$user) {
             /** @var self $user */
             $user = self::create([
                 'name' => $socialUser->getName(),
-                'email' => $socialUser->getEmail(),
+                'email' => $email,
                 'avatar' => $socialUser->getAvatar(),
                 'password' => \Str::random(12),
             ]);

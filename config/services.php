@@ -51,7 +51,7 @@ return [
     ],
 
     UserSocial::TELEGRAM_PROVIDER => [
-        'bot' => env('TELEGRAM_BOT_NAME'),  // The bot's username
+        'bot' => env('TELEGRAM_BOT_NAME'),
         'client_id' => null,
         'client_secret' => env('TELEGRAM_TOKEN'),
         'redirect' => env('APP_URL') . '/social/telegram-callback',
